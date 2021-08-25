@@ -1,0 +1,42 @@
+--- lazysizes-v.4.1.6.js	2019-03-10 01:08:13.047858860 -0800
++++ lazysizes-v.4.1.6-mods.js	2019-03-10 01:25:30.598982490 -0800
+@@ -419,15 +419,34 @@
+ 
+ 		var throttledCheckElements = throttle(checkElements);
+ 
+-		var switchLoadingClass = function(e){
+-			addClass(e.target, lazySizesConfig.loadedClass);
++		var switchLoadingClass = function(e) {
++			if (e && e.target) {
++				addRemoveLoadEvents(e.target, rafSwitchLoadingClass);
++			}
++
+ 			removeClass(e.target, lazySizesConfig.loadingClass);
+-			addRemoveLoadEvents(e.target, rafSwitchLoadingClass);
+-			triggerEvent(e.target, 'lazyloaded');
++
++			switch (e.type) {
++				case 'load':
++					addClass(e.target, lazySizesConfig.loadedClass);
++					triggerEvent(e.target, 'lazyloaded');
++					break;
++				case 'error':
++					addClass(e.target, lazySizesConfig.errorClass);
++					break;
++				default:
++					// For future, any other e.type.
++					// Also reaches here on switchLoadingClass() call in rAF()
++					// at the bottom of lazyUnveil -- that is commented as we
++					// find it's unnecesary and RAF resource wastage. (Not
++					// sure why it was added, see issue #614)
++			}
+ 		};
++
+ 		var rafedSwitchLoadingClass = rAFIt(switchLoadingClass);
+ 		var rafSwitchLoadingClass = function(e){
+-			rafedSwitchLoadingClass({target: e.target});
++			// Also passing the e.type, for handling load err.
++			rafedSwitchLoadingClass({target: e.target, type: e.type});
+ 		};
+ 
+ 		var changeIframeSrc = function(elem, src){

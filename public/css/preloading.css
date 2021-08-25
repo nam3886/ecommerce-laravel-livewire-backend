@@ -1,0 +1,132 @@
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #fef5ef;
+    opacity: 1;
+    z-index: 2147483648;
+    transition: opacity 250ms ease;
+}
+
+#preloader.hidden {
+    opacity: 0;
+    z-index: -1;
+}
+
+.loader {
+    width: 80px;
+    height: 67px;
+    margin: auto;
+    position: relative;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.loader .text-load {
+    position: absolute;
+    bottom: -5px;
+    left: -70px;
+    margin: 0;
+    color: #444;
+}
+
+.loader .square {
+    display: inline-block;
+    font-family: "FontAwesome";
+    font-size: 50px;
+    color: #444;
+    line-height: 1.25;
+    margin: 0 auto;
+    margin-left: 1.25rem;
+    border-radius: 4px;
+    animation-fill-mode: both;
+    animation: motion 2.5s infinite cubic-bezier(0.89, 0.03, 0.06, 1.5);
+}
+
+.loader .path {
+    height: 10px;
+    width: 110px;
+    overflow: hidden;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.loader .path > div {
+    /* background: #F17B50; */
+    background: #444;
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+    margin: 0 15px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    animation-fill-mode: both;
+    animation: dynamic 5s infinite cubic-bezier(0.89, 0.03, 0.06, 1.5);
+}
+
+.loader .path > div:nth-child(1) {
+    left: 40px;
+}
+
+.loader .path > div:nth-child(2) {
+    left: 80px;
+}
+
+.loader .path > div:nth-child(3) {
+    left: 120px;
+}
+
+.loader .path > div:nth-child(4) {
+    left: 160px;
+}
+
+.loader .path > div:nth-child(5) {
+    left: 200px;
+}
+
+.loader .path > div:nth-child(6) {
+    left: 240px;
+}
+
+.loader .path > div:nth-child(7) {
+    left: 280px;
+}
+
+@keyframes motion {
+    50% {
+        transform: rotate(180deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes dynamic {
+    0% {
+        transform: translateX(-40px);
+    }
+
+    25% {
+        transform: translateX(-80px);
+    }
+
+    50% {
+        transform: translateX(-120px);
+    }
+
+    75% {
+        transform: translateX(-160px);
+    }
+
+    100% {
+        transform: translateX(-200px);
+    }
+}
